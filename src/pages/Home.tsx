@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 
 import { Header } from "../components/Header";
 import { Task, TasksList } from "../components/TasksList";
@@ -8,7 +8,7 @@ import { TodoInput } from "../components/TodoInput";
 export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  function handleAddTask(newTaskTitle: string) {
+  const handleAddTask = (newTaskTitle: string) => {
     //TODO - add new task
     const data = {
       id: new Date().getTime(),
@@ -17,27 +17,55 @@ export function Home() {
     };
 
     setTasks([...tasks, data]);
-  }
+  };
 
-  function handleToggleTaskDone(id: number) {
+  const handleSubmitEdit = (t: Task) => {
     //TODO - toggle task done if exists
     const newTask: Task[] = [];
 
     tasks.map((task) => {
-      if (task.id === id) {
+      if (task.id === t.id) {
         newTask.push({
           ...task,
-          done: !task.done,
+          title: t.title,
         });
+      } else {
+        newTask.push({ ...task });
       }
+    });
+    console.log("newTask", newTask);
+    setTasks([...newTask]);
+  };
+
+  const handleToggleTaskDone = (id: number) => {
+    //TODO - toggle task done if exists
+    const newTask: Task[] = [];
+
+    tasks.map((task) => {
+      newTask.push({
+        ...task,
+        ...(task.id === id ? { done: !task.done } : { done: task.done }),
+      });
     });
 
     setTasks([...newTask]);
-  }
+  };
 
   function handleRemoveTask(id: number) {
     //TODO - remove task from state
-    setTasks(tasks.filter((task) => task.id !== id));
+    Alert.alert(
+      "Você tem certeza?",
+      "Tem certeza que deseja excluir essa tarefa?",
+      [
+        {
+          text: "Cancelar",
+        },
+        {
+          text: "Excluir",
+          onPress: () => setTasks(tasks.filter((task) => task.id !== id)),
+        },
+      ]
+    );
   }
 
   return (
@@ -50,6 +78,7 @@ export function Home() {
         tasks={tasks}
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask}
+        submitEdit={handleSubmitEdit}
       />
     </View>
   );
