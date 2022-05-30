@@ -50,7 +50,7 @@ O projeto foi desenvolvido utilizando algumas das tecnologias
 1. Faça um clone :
 
 ```sh
-  $ git https://github.com/limk10/react-native-todos.git
+  $ git clone https://github.com/limk10/react-native-todos.git
 ```
 
 2. Executando a Aplicação:
