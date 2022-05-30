@@ -65,7 +65,7 @@ O projeto foi desenvolvido utilizando algumas das tecnologias
   # Execute a aplicação no Android
   $ yarn android
   
-  # Execute a aplicação no IOOS
+  # Execute a aplicação no IOS
   yarn ios
 ```
 
