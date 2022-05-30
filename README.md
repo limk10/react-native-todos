@@ -69,7 +69,7 @@ O projeto foi desenvolvido utilizando algumas das tecnologias
   yarn ios
 ```
 
-<a id="como-usarr"></a>
+<a id="como-usar"></a>
 
 
 ## :memo: License
